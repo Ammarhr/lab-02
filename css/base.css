@@ -3,9 +3,28 @@ body {
     background-color: rgb(147, 224, 226);
 }
 
+h1 {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
 header {
     text-align: center;
     background-color: cadetblue;
     height: 120px;
     border: black solid 2px;
+}
+
+h2 {
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+p {
+    font-size: larger;
+}
+
+footer {
+    font-size: larger;
+    font-weight: bolder;
 }

@@ -11,15 +11,23 @@ section {
     text-align: center;
 }
 
+h1 {
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
 p {
     float: left;
     clear: both;
     padding-left: 50px;
+    padding-top: 20px;
 }
 
 h2 {
     clear: both;
     padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 footer {
