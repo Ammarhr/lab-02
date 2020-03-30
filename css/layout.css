@@ -1,0 +1,29 @@
+main {
+    text-align: center;
+}
+
+section {
+    float: left;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    position: relative;
+    text-align: center;
+}
+
+p {
+    float: left;
+    clear: both;
+    padding-left: 50px;
+}
+
+h2 {
+    clear: both;
+    padding-left: 30px;
+}
+
+footer {
+    margin-top: 100px;
+    clear: both;
+    text-align: center;
+}

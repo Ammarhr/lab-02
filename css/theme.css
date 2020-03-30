@@ -1,0 +1,36 @@
+      section {
+          width: 350px;
+          height: 450px;
+          float: left;
+          border: black solid 2px;
+          background-color: cadetblue;
+      }
+      
+      .photo-container {
+          display: none;
+      }
+      
+      img {
+          width: 200px;
+          height: 250px;
+          /* float: left; */
+      }
+      
+      p {
+          float: left;
+          clear: both;
+          width: 250px;
+      }
+      
+      h2 {
+          width: 250px;
+          clear: both;
+          padding-left: 30px;
+      }
+      
+      footer {
+          background-color: cadetblue;
+          margin-top: 100px;
+          clear: both;
+          text-align: center;
+      }

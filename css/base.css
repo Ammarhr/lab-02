@@ -1,0 +1,11 @@
+body {
+    font-family: cursive;
+    background-color: rgb(147, 224, 226);
+}
+
+header {
+    text-align: center;
+    background-color: cadetblue;
+    height: 120px;
+    border: black solid 2px;
+}
