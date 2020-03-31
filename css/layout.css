@@ -6,6 +6,19 @@ section {
     justify-content: space-around;
 }
 
+#third-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+/* #third-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+} */
+
 p {
     align-self: center;
     text-align: justify;

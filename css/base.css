@@ -36,3 +36,9 @@ footer {
     font-size: larger;
     font-weight: bolder;
 }
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

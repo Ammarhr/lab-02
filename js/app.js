@@ -1,6 +1,7 @@
 'usestrict';
 
 let Arr1 = [];
+// let Arr2 = [];
 Item.all = [];
 
 function Item(image_url, title, description, keyword, horns) {
@@ -29,7 +30,7 @@ $.get('data/page-2.json')
     .then(data => {
         data.forEach(value => {
             let itms2 = new Item(value.image_url, value.title, value.description, value.keyword, value.horns);
-            //   Arr2.push(itms2);
+            Arr1.push(itms2);
             if (!newArr2.includes(value.keyword)) {
                 newArr2.push(value.keyword);
                 $('#filter').append(`<option class="filter2">${value.keyword}</option>`);
@@ -56,7 +57,6 @@ Item.prototype.itmsRender = function() {
     let viewTmpl = $('#horns-template').html();
     let htmlLook = Mustache.render(viewTmpl, this);
     $('#first-page').append(htmlLook);
-
 };
 // prototype to render the page-2.json data:
 Item.prototype.itmsRender2 = function() {
@@ -69,6 +69,7 @@ Item.prototype.itmsRender2 = function() {
 $('#page-1').on('click', function() {
     //     console.log('you are in the first page');
     $('#second-page').hide();
+    $('#third-page').hide();
     $('.filter2').hide();
     $('#first-page').show();
     $('.filter1').show();
@@ -78,10 +79,10 @@ $('#page-1').on('click', function() {
 $('#page-2').on('click', function() {
     //     console.log('you are in the first page');
     $('#first-page').hide();
+    $('#third-page').hide();
     $('.filter1').hide();
     $('#second-page').show();
     $('.filter2').show();
-
 })
 
 // functoin to  filter the images appear:
@@ -90,28 +91,7 @@ $('#filter').on('change', function() {
     $('section').hide(); // all the sections will hide
     $(`.${selectedItem}`).show(); // the selected section will show(depend on its class name).
 });
-// $('#sort').on('change', arr => {
-//     let sort1 = $('#sort').find(':selected ').text();
-//     if (sort1 === 'Name') {
-//         console.log('asasdzzzzzzzzzzzz');
-//         arr.sort(function(a, b) {
-//             if (a.title < b.title) {
-//                 return -1;
-//             }
-//             if (a.title > b.title) {
-//                 return 1;
-//             }
-//             return 0;
-//         });
-//         return arr;
-//     } else {
-//         arr.sort(function(a, b) {
-//             return a.horns - b.horns;
-//         });
-//         return arr;
-//     }
 
-// });
 $('#sort').on('change', function() {
     let sort1 = $('#sort').find(':selected ').text();
     if (sort1 === 'Name') {
@@ -119,15 +99,33 @@ $('#sort').on('change', function() {
         Item.all.sort((a, b) => {
             if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
             if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-            return 0;
+            return Item.all;
         });
+        $('#sec').empty();
+        renderOut();
     } else if (sort1 === 'Horns') {
         Item.all.sort((a, b) => {
             if (a.horns < b.horns) return -1;
             if (a.horns > b.horns) return 1;
-            return 0;
+            return Item.all;
         });
+        $('#sec').empty();
+        renderOut();
     }
 });
-console.log('cons', Item.all);
-// console.log(Arr1);
+console.log('Item.all', Item.all);
+
+function renderOut() {
+    for (var i = 0; i < Item.all.length; i++) {
+
+        let itemRender = $('.photo-container').clone().attr('class', Item.all[i].keyword);
+        itemRender.removeClass('photo-container');
+        itemRender.find('h2').text(`${Item.all[i].title}`).attr('class', Item.all[i].keyword);
+        itemRender.find('img').attr('src', Item.all[i].image_url).attr('class', Item.all[i].keyword);
+        itemRender.find('p').text(`${Item.all[i].description}`).attr('class', Item.all[i].keyword);
+        $('main').append(itemRender);
+    }
+    $('#second-page').hide();
+    $('#first-page').hide();
+    $('#third-page').show();
+}
