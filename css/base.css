@@ -6,13 +6,21 @@ body {
 h1 {
     font-size: xx-large;
     font-weight: bolder;
+    width: 350px;
 }
 
 header {
-    text-align: center;
     background-color: cadetblue;
-    height: 120px;
+    height: 150px;
     border: black solid 2px;
+}
+
+#sort {
+    width: 100px;
+}
+
+#filter {
+    width: 120px;
 }
 
 h2 {
