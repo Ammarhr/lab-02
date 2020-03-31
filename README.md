@@ -38,14 +38,49 @@ Finish time: 6:30pm
 Actual time needed to complete:  1:30 hours
 
 ---------------------------------------------------------------------
-Number and name of feature: **Stretch Goal: Sort the images**
+## lab 03
+Number and name of feature: **#1 :  Pagination**
 
-Estimate of time needed to complete: 2 hours
-Start time: 9:00 pm
+Estimate of time needed to complete: 1 hour
 
-Finish time: 10:00 pm
+Start time: 5:00pm 
 
-Actual time needed to complete: 1 hour
+Finish time: 5:30pm
+
+Actual time needed to complete:  30 hours
+
+---------------------------------------------------------------------
+Number and name of feature: **#2: Templating**
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 5:00pm 
+
+Finish time: 6:00pm
+
+Actual time needed to complete:  1:00 hours
+
+---------------------------------------------------------------------
+Number and name of feature: **#3: Styling with Flexbox**
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 5:00pm 
+
+Finish time: 6:30pm
+
+Actual time needed to complete:  1:30 hours
+
+---------------------------------------------------------------------
+Number and name of feature: **#4: Sort the images**
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 5:00pm 
+
+Finish time: 8:30pm
+
+Actual time needed to complete:  3:30 hours
 
 
 >> **Note:** I try to solve this in different ways so that it takes time
