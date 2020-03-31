@@ -101,6 +101,8 @@ $('#sort').on('change', function() {
             if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
             return Item.all;
         });
+         $('#second-page').hide();
+        $('#first-page').hide();
         $('#third-page').hide();
         renderOut();
     } else if (sort1 === 'Horns') {
@@ -109,6 +111,8 @@ $('#sort').on('change', function() {
             if (a.horns > b.horns) return 1;
             return Item.all;
         });
+         $('#second-page').hide();
+        $('#first-page').hide();
         $('#third-page').hide();
         renderOut();
     }
