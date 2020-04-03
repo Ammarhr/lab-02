@@ -1,17 +1,9 @@
 'usestrict';
 
 let Arr1 = [];
-// let Arr2 = [];
+let Arr2 = [];
 Item.all = [];
 
-function Item(image_url, title, description, keyword, horns) {
-    this.image_url = image_url;
-    this.title = title;
-    this.description = description;
-    this.keyword = keyword;
-    this.horns = horns;
-    Item.all.push(this);
-}
 let newArr = [];
 $.get('data/page-1.json')
     .then(data => {
@@ -25,6 +17,15 @@ $.get('data/page-1.json')
             itms1.itmsRender();
         });
     });
+
+function Item(image_url, title, description, keyword, horns) {
+    this.image_url = image_url;
+    this.title = title;
+    this.description = description;
+    this.keyword = keyword;
+    this.horns = horns;
+    Item.all.push(this);
+}
 let newArr2 = [];
 $.get('data/page-2.json')
     .then(data => {
@@ -38,8 +39,7 @@ $.get('data/page-2.json')
             itms2.itmsRender2();
         });
     });
-// console.log('this is arr 1', Arr1);
-// console.log('this is arr 2', Arr2);
+
 // prototype to render the page-1.json data:
 Item.prototype.itmsRender = function() {
     //first way:
@@ -63,69 +63,91 @@ Item.prototype.itmsRender2 = function() {
     let viewTmpl = $('#horns-template').html();
     let htmlLook = Mustache.render(viewTmpl, this);
     $('#second-page').append(htmlLook);
-}
+};
 
 // functoin to hide  page-2.json data and show page-2.json data and filter lest:
 $('#page-1').on('click', function() {
     //     console.log('you are in the first page');
     $('#second-page').hide();
     $('#third-page').hide();
+    $('#fourth-page').hide();
     $('.filter2').hide();
     $('#first-page').show();
     $('.filter1').show();
-})
+});
 
 // functoin to hide  page-2.json data and show page-2.json data and filter lest:
 $('#page-2').on('click', function() {
     //     console.log('you are in the first page');
     $('#first-page').hide();
     $('#third-page').hide();
+    $('#fourth-page').hide();
     $('.filter1').hide();
     $('#second-page').show();
     $('.filter2').show();
-})
+});
 
 // functoin to  filter the images appear:
 $('#filter').on('change', function() {
+    Arr1 = [];
     let selectedItem = $('#filter').find(':selected ').text(); // :selected proprety to find the selected option. 
-    $('section').hide(); // all the sections will hide
+    for (let i = 0; i < Item.all.length; i++) {
+        if (selectedItem === Item.all[i].keyword) {
+            Arr1.push(Item.all[i]);
+            console.log('filtered', Arr1);
+        }
+    }
+
+    $('section').hide();
+    $('#third-page').show();
+    //     $('#fourth-page').show();
+    // all the sections will hide
     $(`.${selectedItem}`).show(); // the selected section will show(depend on its class name).
 });
 
 $('#sort').on('change', function() {
     let sort1 = $('#sort').find(':selected ').text();
     if (sort1 === 'Name') {
-        console.log("ok her we go")
-        Item.all.sort((a, b) => {
+        $('#first-page').hide();
+        $('#second-page').hide();
+        //         $('#third-page').show();
+        $('#third-page').empty();
+        //         console.log("ok her we go")
+        Arr1.sort((a, b) => {
             if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
             if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-            return Item.all;
+            return Arr1;
         });
-        $('#sec').empty();
         renderOut();
     } else if (sort1 === 'Horns') {
-        Item.all.sort((a, b) => {
+        $('#first-page').hide();
+        $('#second-page').hide();
+        //         $('#fourth-page').show();
+        $('#third-page').empty();
+        Arr1.sort((a, b) => {
             if (a.horns < b.horns) return -1;
             if (a.horns > b.horns) return 1;
-            return Item.all;
+            return Arr1;
         });
-        $('#sec').empty();
-        renderOut();
+        renderOutHorns();
     }
 });
-console.log('Item.all', Item.all);
+// console.log('Item.all', Item.all);
 
 function renderOut() {
-    for (var i = 0; i < Item.all.length; i++) {
-
-        let itemRender = $('.photo-container').clone().attr('class', Item.all[i].keyword);
-        itemRender.removeClass('photo-container');
-        itemRender.find('h2').text(`${Item.all[i].title}`).attr('class', Item.all[i].keyword);
-        itemRender.find('img').attr('src', Item.all[i].image_url).attr('class', Item.all[i].keyword);
-        itemRender.find('p').text(`${Item.all[i].description}`).attr('class', Item.all[i].keyword);
-        $('main').append(itemRender);
+    for (var i = 0; i < Arr1.length; i++) {
+        $(`#third-page`).append(`<section class = ${i}></section>`);
+        $(`.${i}`).append(`<h2 class = ${Arr1[i].keyword}>${Arr1[i].title}</h2>`);
+        $(`.${i}`).append(`<img src = ${Arr1[i].image_url} class = ${Arr1[i].keyword}></img>`);
+        $(`.${i}`).append(`<p class =${Arr1[i].keyword}> ${Arr1[i].description}</p>`);
     }
-    $('#second-page').hide();
-    $('#first-page').hide();
-    $('#third-page').show();
+}
+
+function renderOutHorns() {
+    for (var i = 0; i < Arr1.length; i++) {
+        $(`#third-page`).append(`<section id = ${i}></section>`);
+        $(`#${i}`).append(`<h2 class = ${Arr1[i].keyword}>${Arr1[i].title}</h2>`);
+        $(`#${i}`).append(`<img src = ${Arr1[i].image_url} class = ${Arr1[i].keyword}></img>`);
+        $(`#${i}`).append(`<p class =${Arr1[i].keyword}> ${Arr1[i].description}</p>`);
+    }
 }
