@@ -48,18 +48,7 @@ $.get('data/page-2.json')
 
 // prototype to render the page-1.json data:
 Item.prototype.itmsRender = function() {
-    //first way:
-    //     $('div').append(`<h2 class = ${this.keyword}>${this.title}</h2>`);
-    //     $('div').append(`<img src = ${this.image_url} class = ${this.keyword}></img>`);
-    //     $('div').append(`<p class = ${this.keyword}>${this.description}</p>`);
-    // second way:
-    //         let itemRender = $('.photo-container').clone().attr('class', this.keyword);
-    //         itemRender.removeClass('photo-container');
-    //         itemRender.find('h2').text(`${this.title}`).attr('class', this.keyword);
-    //         itemRender.find('img').attr('src', this.image_url).attr('class', this.keyword);
-    //         itemRender.find('p').text(`${this.description}`).attr('class', this.keyword);
-    //         $('main').append(itemRender);
-    //third way:
+
     let viewTmpl = $('#horns-template').html();
     let htmlLook = Mustache.render(viewTmpl, this);
     $('#first-page').append(htmlLook);
@@ -76,16 +65,15 @@ $('#page-1').on('click', function() {
     Arr1 = []; //     console.log('you are in the first page');
     for (let i = 0; i < filter1.length; i++) {
         Arr1.push(filter1[i]);
+
+        $('#second-page').hide();
+        $('.filter2').hide();
+        $('#first-page').hide();
+        $('#third-page').empty();
+        $('#third-page').show();
+        renderOut();
+        $('.filter1').show();
     }
-    Arr2 = []; //     console.log('you are in the first page');
-    for (let i = 0; i < filter1.length; i++) {
-        Arr2.push(filter1[i]);
-    }
-    $('#second-page').hide();
-    //     $('#third-page').hide();
-    $('.filter2').hide();
-    $('#first-page').show();
-    $('.filter1').show();
 });
 
 // functoin to hide  page-2.json data and show page-2.json data and filter lest:
@@ -96,40 +84,39 @@ $('#page-2').on('click', function() {
     for (let i = 0; i < filter2.length; i++) {
         Arr1.push(filter2[i]);
     }
-    for (let i = 0; i < filter2.length; i++) {
-        Arr2.push(filter2[i]);
-    }
+
     $('#first-page').hide();
-    //     $('#third-page').hide();
     $('.filter1').hide();
-    $('#second-page').show();
+    $('#second-page').hide();
     $('.filter2').show();
+    $('#third-page').empty();
+    $('#third-page').show();
+    renderOut();
 });
 
 // functoin to  filter the images appear:
 $('#filter').on('change', function() {
     Arr1 = [];
-    Arr2 = [];
     let selectedItem = $('#filter').find(':selected ').text(); // :selected proprety to find the selected option. 
     for (let i = 0; i < Item.all.length; i++) {
         if (selectedItem === Item.all[i].keyword) {
             Arr1.push(Item.all[i]);
             Arr2.push(Item.all[i]);
-            //   console.log('filtered', Arr1);
         }
     }
 
-    $('section').hide();
+    //     $('section').hide();
     //     // all the sections will hide
-    $(`.${selectedItem}`).show(); // the selected section will show(depend on its class name).
-
+    //     $(`.${selectedItem}`).show(); // the selected section will show(depend on its class name).
+    $('#first-page').hide();
+    $('.filter1').hide();
+    $('#second-page').hide();
+    $('#third-page').show();
     $('#third-page').empty();
 
     renderOut();
 
-    //     $('#second-page').hide();
-    //     $('#first-page').hide();
-    //     $('#third-page').hide();
+
 });
 
 $('#sort').on('change', function() {
