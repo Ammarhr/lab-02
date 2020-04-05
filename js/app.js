@@ -2,6 +2,8 @@
 
 let Arr1 = [];
 let Arr2 = [];
+let filter1 = [];
+let filter2 = [];
 Item.all = [];
 
 let newArr = [];
@@ -10,6 +12,8 @@ $.get('data/page-1.json')
         data.forEach(value => {
             let itms1 = new Item(value.image_url, value.title, value.description, value.keyword, value.horns);
             Arr1.push(itms1);
+            Arr2.push(itms1);
+            filter1.push(itms1);
             if (!newArr.includes(value.keyword)) {
                 newArr.push(value.keyword);
                 $('#filter').append(`<option class="filter1">${value.keyword}</option>`);
@@ -32,6 +36,8 @@ $.get('data/page-2.json')
         data.forEach(value => {
             let itms2 = new Item(value.image_url, value.title, value.description, value.keyword, value.horns);
             Arr1.push(itms2);
+            Arr2.push(itms2);
+            filter2.push(itms2);
             if (!newArr2.includes(value.keyword)) {
                 newArr2.push(value.keyword);
                 $('#filter').append(`<option class="filter2">${value.keyword}</option>`);
@@ -67,10 +73,16 @@ Item.prototype.itmsRender2 = function() {
 
 // functoin to hide  page-2.json data and show page-2.json data and filter lest:
 $('#page-1').on('click', function() {
-    //     console.log('you are in the first page');
+    Arr1 = []; //     console.log('you are in the first page');
+    for (let i = 0; i < filter1.length; i++) {
+        Arr1.push(filter1[i]);
+    }
+    Arr2 = []; //     console.log('you are in the first page');
+    for (let i = 0; i < filter1.length; i++) {
+        Arr2.push(filter1[i]);
+    }
     $('#second-page').hide();
-    $('#third-page').hide();
-    $('#fourth-page').hide();
+    //     $('#third-page').hide();
     $('.filter2').hide();
     $('#first-page').show();
     $('.filter1').show();
@@ -78,10 +90,17 @@ $('#page-1').on('click', function() {
 
 // functoin to hide  page-2.json data and show page-2.json data and filter lest:
 $('#page-2').on('click', function() {
+    Arr1 = [];
+    Arr2 = [];
     //     console.log('you are in the first page');
+    for (let i = 0; i < filter2.length; i++) {
+        Arr1.push(filter2[i]);
+    }
+    for (let i = 0; i < filter2.length; i++) {
+        Arr2.push(filter2[i]);
+    }
     $('#first-page').hide();
-    $('#third-page').hide();
-    $('#fourth-page').hide();
+    //     $('#third-page').hide();
     $('.filter1').hide();
     $('#second-page').show();
     $('.filter2').show();
@@ -90,19 +109,27 @@ $('#page-2').on('click', function() {
 // functoin to  filter the images appear:
 $('#filter').on('change', function() {
     Arr1 = [];
+    Arr2 = [];
     let selectedItem = $('#filter').find(':selected ').text(); // :selected proprety to find the selected option. 
     for (let i = 0; i < Item.all.length; i++) {
         if (selectedItem === Item.all[i].keyword) {
             Arr1.push(Item.all[i]);
-            console.log('filtered', Arr1);
+            Arr2.push(Item.all[i]);
+            //   console.log('filtered', Arr1);
         }
     }
 
     $('section').hide();
-    $('#third-page').show();
-    //     $('#fourth-page').show();
-    // all the sections will hide
+    //     // all the sections will hide
     $(`.${selectedItem}`).show(); // the selected section will show(depend on its class name).
+
+    $('#third-page').empty();
+
+    renderOut();
+
+    //     $('#second-page').hide();
+    //     $('#first-page').hide();
+    //     $('#third-page').hide();
 });
 
 $('#sort').on('change', function() {
@@ -129,13 +156,13 @@ $('#sort').on('change', function() {
             if (a.horns > b.horns) return 1;
             return Arr1;
         });
-        renderOutHorns();
+        renderOut();
     }
 });
 // console.log('Item.all', Item.all);
 
 function renderOut() {
-    for (var i = 0; i < Arr1.length; i++) {
+    for (let i = 0; i < Arr1.length; i++) {
         $(`#third-page`).append(`<section class = ${i}></section>`);
         $(`.${i}`).append(`<h2 class = ${Arr1[i].keyword}>${Arr1[i].title}</h2>`);
         $(`.${i}`).append(`<img src = ${Arr1[i].image_url} class = ${Arr1[i].keyword}></img>`);
@@ -143,11 +170,11 @@ function renderOut() {
     }
 }
 
-function renderOutHorns() {
-    for (var i = 0; i < Arr1.length; i++) {
-        $(`#third-page`).append(`<section id = ${i}></section>`);
-        $(`#${i}`).append(`<h2 class = ${Arr1[i].keyword}>${Arr1[i].title}</h2>`);
-        $(`#${i}`).append(`<img src = ${Arr1[i].image_url} class = ${Arr1[i].keyword}></img>`);
-        $(`#${i}`).append(`<p class =${Arr1[i].keyword}> ${Arr1[i].description}</p>`);
-    }
-}
+// function renderOutHorns() {
+//     for (let i = 0; i < Arr1.length; i++) {
+//         $(`#third-page`).append(`<section id = ${i}></section>`);
+//         $(`#${i}`).append(`<h2 class = ${Arr1[i].keyword}>${Arr1[i].title}</h2>`);
+//         $(`#${i}`).append(`<img src = ${Arr1[i].image_url} class = ${Arr1[i].keyword}></img>`);
+//         $(`#${i}`).append(`<p class =${Arr1[i].keyword}> ${Arr1[i].description}</p>`);
+//     }
+// };
