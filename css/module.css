@@ -5,7 +5,8 @@
           background-color: cadetblue;
       }
       
-      .photo-container {
+      .photo-container,
+      .photo-container2 {
           display: none;
       }
       

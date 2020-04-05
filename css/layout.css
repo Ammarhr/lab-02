@@ -6,16 +6,16 @@ section {
     justify-content: space-around;
 }
 
-#third-page {
+
+/* #third-page {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-
-/* #third-page {
+#fourth-page {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-evenly;
 } */
 
